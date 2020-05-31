@@ -1,0 +1,23 @@
+.jumbotron {
+  margin-top: 2rem;
+  background-color: lavenderblush;
+}
+#link {
+  color: white;
+  background-color: hotpink;
+  border-color: hotpink;
+}
+#link:hover {
+  background-color: deeppink;
+  border-color: deeppink;
+}
+.carousel-inner {
+  background-color: azure;
+}
+.carousel-indicators {
+  position: relative;
+}
+.carousel-indicators li {
+  width: auto;
+  height: auto;
+}
