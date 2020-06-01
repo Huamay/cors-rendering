@@ -84,8 +84,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script>
 function renderPage(evt) {
-    if (evt.target.readyState != 4 || evt.target.status != 200) {
-        $("div.jumbotron h1:first").text("Invalid request");
+    var xhr = evt.target;
+    if (xhr.readyState != 4 || xhr.status != 200) {
+        $("div.jumbotron h1:first").text(xhr.readyState == 4 ? "Invalid request" : "Loading...");
         return;
     }
     var info = evt.target.response;
@@ -99,10 +100,11 @@ function renderPage(evt) {
         labels.append(`<span class="badge badge-pill badge-light">${ft}</span>`);
     $("#link").text(info.id);
     $("#link").attr("href", info.hp);
+    $("#link").attr("target", "_blank");
     var i;
     $(".carousel-item").remove();
     for (i = 1; i <= info.pn; i++)
-        $(".carousel-inner").append(`<div class="carousel-item"><img src="${info.irl}jp-${i}.jpg" class="mx-auto d-block"></div>`);
+        $(".carousel-inner").append(`<div class="carousel-item"><img src="${info.irl}jp-${i}.jpg" class="mx-auto d-block w-100"></div>`);
     $(".carousel-item:first").addClass("active");
     $(".carousel-indicators li").remove();
     for (i = 1; i <= info.pn; i++)
@@ -126,7 +128,7 @@ function load() {
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = renderPage;
-    var url = "https://dev.xuming.design/render";
+    var url = "https://xuming.design/render";
     var data = JSON.stringify({token: token});
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader("Content-Type", "application/json");
