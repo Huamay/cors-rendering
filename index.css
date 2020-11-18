@@ -21,3 +21,7 @@
   width: auto;
   height: auto;
 }
+.list-group-item.active {
+  background-color: peachpuff;
+  border-color: peachpuff;
+}
